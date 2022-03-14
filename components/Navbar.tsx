@@ -1,15 +1,11 @@
-import { GetServerSideProps } from 'next'
-import { useState } from 'react'
-
 interface User {
-  data: {
+  user: {
     station_code: number
     name: string
-    profile_key: string
+    url: string
   }
 }
-
-const Navbar = ({ data }: User) => {
+const Navbar = ({ user }: User) => {
   return (
     <>
       <nav className="bg-[#101010]">
@@ -35,9 +31,13 @@ const Navbar = ({ data }: User) => {
                     aria-haspopup="true"
                   >
                     <p className="text-l mr-3 items-center justify-center font-bold text-white">
-                      {/* {data.name} */}
+                      {user.name}
                     </p>
-                    <img className="h-10 w-10 rounded-full" src="lol" alt="" />
+                    <img
+                      className="h-10 w-10 rounded-full"
+                      src={user.url}
+                      alt=""
+                    />
                   </button>
                 </div>
               </div>

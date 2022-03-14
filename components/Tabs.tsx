@@ -1,7 +1,12 @@
 import { useState } from 'react'
 import Link from 'next/link'
-import { Router, useRouter } from 'next/router'
-const Tabs = () => {
+import { useRouter } from 'next/router'
+import { v4 as uuidv4 } from 'uuid'
+interface DropMenuData {
+  state: string[]
+  city: string[]
+}
+const Tabs = ({ state, city }: DropMenuData) => {
   const [isOpen, setIsOpen] = useState(false)
   const hoverClass: string =
     'z-10 absolute right-0 mt-2 w-[200px] origin-top-right rounded-md bg-white p-3 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none'
@@ -46,7 +51,7 @@ const Tabs = () => {
                 </Link>
 
                 <a className="text-md mr-10 cursor-not-allowed text-[#D0CBCB]">
-                  Past Rides
+                  Past Rides (2)
                 </a>
               </div>
             </div>
@@ -108,7 +113,14 @@ const Tabs = () => {
                       className="w-full rounded border-0 bg-[#232323] text-white"
                       id="select_one"
                     >
-                      <option value="State">State</option>
+                      <option selected value="def" disabled>
+                        State
+                      </option>
+                      {state.map((s) => (
+                        <option value="State" key={uuidv4()}>
+                          {s}
+                        </option>
+                      ))}
                     </select>
 
                     <select
@@ -116,7 +128,14 @@ const Tabs = () => {
                       className="mt-3 w-full rounded border-0 bg-[#232323] text-white"
                       id="select_one"
                     >
-                      <option value="City">City</option>
+                      <option value="def-2" disabled selected>
+                        City
+                      </option>
+                      {city.map((c) => (
+                        <option value="city" key={uuidv4()}>
+                          {c}
+                        </option>
+                      ))}
                     </select>
                   </form>
                 </div>
