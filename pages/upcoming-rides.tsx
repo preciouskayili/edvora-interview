@@ -4,7 +4,6 @@ import Head from 'next/head'
 import RideCard from '../components/RideCard'
 import { GetServerSideProps } from 'next'
 import { v4 as uuidv4 } from 'uuid'
-
 interface Ride {
   data: Array<{
     id: number
@@ -18,7 +17,7 @@ interface Ride {
   }>
 }
 
-const Home = ({ data }: Ride) => {
+const UpcomingRides = ({ data }: Ride) => {
   const rideProps = {
     rideData: data,
   }
@@ -45,7 +44,7 @@ const Home = ({ data }: Ride) => {
   )
 }
 
-export default Home
+export default UpcomingRides
 
 export const getServerSideProps: GetServerSideProps = async () => {
   const res = await fetch('https://assessment.api.vweb.app/rides')
@@ -54,19 +53,6 @@ export const getServerSideProps: GetServerSideProps = async () => {
   return {
     props: {
       data,
-    },
-  }
-}
-
-export const getServerProps: GetServerSideProps = async () => {
-  const res = await fetch('https://assessment.api.vweb.app/user')
-  const user = await res.json()
-
-  console.log(user)
-
-  return {
-    props: {
-      user,
     },
   }
 }
